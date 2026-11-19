@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitácora · Construye tu rentabilidad con datos</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='8' width='4' height='10' rx='1' fill='%231fe08f'/%3E%3Crect x='10' y='4' width='4' height='12' rx='1' fill='%23ff4668'/%3E%3Crect x='17' y='6' width='4' height='12' rx='1' fill='%231fe08f'/%3E%3C/svg%3E">
+<meta name="description" content="La mayoría de traders no pierde por su estrategia, sino por cómo la ejecuta. Bitácora registra tus trades de MT5, mide la ventaja real de tu sistema y te muestra cuánto te cuestan tus emociones.">
+<meta name="theme-color" content="#04070d">
+<style>
+@font-face{font-family:Plex;src:url(fuentes/plex-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Plex;src:url(fuentes/plex-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:Grotesk;src:url(fuentes/grotesk-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:Grotesk;src:url(fuentes/grotesk-700.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{--noche:#04070d;--caja:#070c14;--caja2:#0b1320;--borde:#1e2e42;--tinta:#eef3f9;--tinta2:#8b9ab0;--azul:#1fa2ff;--verde:#1fe08f;--rojo:#ff4668;--ambar:#ffc247}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 700px at 10% -10%,rgba(31,162,255,.22),transparent 60%),radial-gradient(900px 600px at 100% 0,rgba(41,98,255,.16),transparent 62%),var(--noche);color:var(--tinta);font:16px/1.55 Plex,"Segoe UI",system-ui,sans-serif}
+a{color:var(--azul)}h1,h2,h3{font-family:Grotesk,Plex,sans-serif;letter-spacing:-.02em;margin:0}
+.envol{max-width:1160px;margin:0 auto;padding:0 16px}
+nav{position:sticky;top:0;z-index:10;background:rgba(4,7,13,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--borde)}
+nav .envol{display:flex;align-items:center;gap:20px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-family:Grotesk;font-weight:700;font-size:20px;color:var(--tinta);text-decoration:none}
+.logo i{display:inline-flex;gap:3px;align-items:flex-end}.logo i b{width:4px;border-radius:2px;background:var(--verde)}.logo i b:nth-child(2){background:var(--rojo)}
+nav .links{display:flex;gap:18px;margin-left:auto}nav .links a{color:var(--tinta2);text-decoration:none;font-size:15px}nav .links a:hover{color:var(--tinta)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;background:var(--azul);color:#03101c;font-weight:600;text-decoration:none;border:1px solid var(--azul);transition:box-shadow .2s,transform .2s,background .2s;cursor:pointer;font:600 15px Plex,sans-serif}
+.btn:hover{box-shadow:0 0 26px -4px rgba(31,162,255,.6);transform:translateY(-1px)}
+.btn.sec{background:transparent;color:var(--tinta);border-color:#2f4a6b}.btn.sec:hover{border-color:var(--azul)}
+.btn.off{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:72px 0 56px}
+.etq{display:inline-block;padding:4px 12px;border-radius:99px;border:1px solid rgba(31,162,255,.4);color:var(--azul);font-size:13px;font-weight:600;margin-bottom:16px}
+.hero h1{font-size:clamp(34px,5vw,56px);line-height:1.05}.hero h1 em{font-style:normal;color:var(--azul)}
+.hero p{color:var(--tinta2);font-size:18px;max-width:540px;margin:18px 0 28px}.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.shot{border-radius:16px;border:1px solid var(--borde);box-shadow:0 30px 80px -30px rgba(31,162,255,.45),0 0 0 1px rgba(255,255,255,.03);width:100%;height:auto;display:block}
+section{padding:56px 0}.titulo{text-align:center;max-width:720px;margin:0 auto 36px}.titulo h2{font-size:clamp(28px,3.6vw,40px)}.titulo p{color:var(--tinta2);margin:12px 0 0}
+.funs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fun{padding:22px;border-radius:16px;background:var(--caja);border:1px solid var(--borde);transition:border-color .2s,box-shadow .2s}
+.fun:hover{border-color:rgba(31,162,255,.5);box-shadow:0 0 24px -6px rgba(31,162,255,.4)}.fun h3{font-size:18px;margin-bottom:8px}.fun p{color:var(--tinta2);margin:0;font-size:15px}
+.quienes{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.quien{padding:22px;border-radius:16px;background:linear-gradient(180deg,rgba(31,162,255,.08),rgba(31,162,255,.01));border:1px solid var(--borde);transition:border-color .2s,box-shadow .2s}
+.quien:hover{border-color:rgba(31,162,255,.5);box-shadow:0 0 24px -6px rgba(31,162,255,.4)}.quien h3{font-size:18px}.q-sub{color:var(--tinta2);font-size:14px;margin:6px 0 12px}
+.quien ul{margin:0;padding:12px 0 0;border-top:1px solid var(--borde);list-style:none;display:flex;flex-direction:column;gap:8px}
+.quien li{position:relative;padding-left:16px;font-size:14px}.quien li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--azul)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.duo h2{font-size:32px;margin-bottom:12px}.duo p{color:var(--tinta2)}
+.controles{display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+.segm{display:inline-flex;padding:4px;border-radius:12px;background:var(--caja);border:1px solid var(--borde)}
+.segm button{border:0;background:none;color:var(--tinta2);padding:8px 16px;border-radius:9px;cursor:pointer;font:600 14px Plex,sans-serif}
+.segm button[aria-pressed=true]{background:#152134;color:var(--tinta)}.ahorro{margin-left:6px;padding:1px 7px;border-radius:99px;background:rgba(31,224,143,.16);color:var(--verde);font-size:11px}
+.ref{display:flex;align-items:center;gap:10px;color:var(--tinta2);font-size:14px}
+.ref input{width:170px;padding:9px 12px;border-radius:10px;border:1px solid var(--borde);background:var(--caja);color:var(--tinta);font:14px Plex,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+.ref-est{font-size:13px;min-height:18px;text-align:center;margin:-16px 0 20px}.ok{color:var(--verde)}.mal{color:var(--rojo)}
+.planes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.plan{position:relative;display:flex;flex-direction:column;gap:8px;padding:28px 24px;border-radius:18px;background:var(--caja);border:1px solid var(--borde);transition:transform .2s,box-shadow .2s,border-color .2s}
+.plan:hover{transform:translateY(-3px);border-color:rgba(31,162,255,.5);box-shadow:0 0 30px -8px rgba(31,162,255,.45)}
+.plan.dest{border-color:rgba(31,162,255,.65);box-shadow:0 24px 60px -30px rgba(31,162,255,.7)}
+.cinta{position:absolute;top:-12px;left:24px;padding:3px 12px;border-radius:99px;background:var(--azul);color:#03101c;font-size:12px;font-weight:700}
+.plan h3{font-size:24px}.lema{color:var(--tinta2);margin:0;font-size:14px}
+.precio{display:flex;align-items:baseline;gap:8px;margin-top:8px}.precio b{font-family:Grotesk;font-size:44px;line-height:1}.precio s{color:var(--tinta2)}.precio span{color:var(--tinta2);font-size:14px}
+.sub{color:var(--tinta2);font-size:13px;margin:0 0 8px;min-height:20px}
+.plan ul{list-style:none;margin:0 0 18px;padding:14px 0 0;border-top:1px solid var(--borde);display:flex;flex-direction:column;gap:10px;flex:1}
+.plan li{display:flex;gap:10px;font-size:15px}.plan li svg,.tabla svg{width:18px;height:18px;flex:none;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.plan li svg,.tabla .si{stroke:var(--verde)}.plan li svg circle,.tabla .si circle{fill:rgba(31,224,143,.14)}.tabla .no{stroke:#4b5a6e}
+.tabla{overflow-x:auto;margin-top:28px;border:1px solid var(--borde);border-radius:16px;background:var(--caja)}
+table{width:100%;border-collapse:collapse;min-width:560px}th,td{padding:12px 16px;border-bottom:1px solid var(--borde);text-align:center;font-size:14px}
+th[scope=row],thead th:first-child{text-align:left;font-weight:400;color:var(--tinta2)}thead th{color:var(--tinta);font-weight:600}tr:last-child th,tr:last-child td{border-bottom:0}
+.niveles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.nivel{padding:22px;border-radius:16px;background:var(--caja);border:1px solid var(--borde)}
+.nivel b{font-family:Grotesk;font-size:20px}.nivel.n0 b{color:#d39a6a}.nivel.n1 b{color:#c9d2dd}.nivel.n2 b{color:var(--ambar)}
+.nivel span{display:block;color:var(--tinta2);font-size:13px}.com{font-family:Grotesk;font-size:34px;font-weight:700;margin-top:8px}.com small{display:block;font:400 13px Plex;color:var(--tinta2)}.nivel p{color:var(--tinta2);margin:6px 0 0;font-size:14px}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px}.paso{padding:20px;border-radius:16px;border:1px dashed rgba(31,162,255,.4)}
+.paso i{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--azul);color:#03101c;font-style:normal;font-weight:700;margin-bottom:8px}.paso p{color:var(--tinta2);margin:4px 0 0;font-size:14px}
+details{border:1px solid var(--borde);border-radius:14px;background:var(--caja);padding:4px 18px;margin-bottom:10px}
+summary{cursor:pointer;padding:14px 0;font-weight:600;list-style:none}summary::-webkit-details-marker{display:none}summary::after{content:"+";float:right;color:var(--azul)}details[open] summary::after{content:"–"}
+details p{color:var(--tinta2);margin:0 0 14px}.faq{max-width:780px;margin:0 auto}
+.final{text-align:center;padding:64px 16px;border-radius:24px;background:linear-gradient(180deg,rgba(31,162,255,.14),rgba(31,162,255,.03));border:1px solid rgba(31,162,255,.3)}.final p{color:var(--tinta2)}
+footer{padding:32px 0;color:var(--tinta2);font-size:13px;border-top:1px solid var(--borde);margin-top:40px}
+.confianza{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;color:var(--tinta2);font-size:14px}.confianza span{display:inline-flex;align-items:center;gap:7px}.confianza span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--verde)}
+.problema{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
+.problema h2{font-size:clamp(38px,5vw,64px);line-height:1}.problema h2 span{display:block;color:var(--rojo)}
+.problema .intro{color:var(--tinta2);font-size:18px;margin:18px 0 0;max-width:30ch}
+.causas{display:flex;flex-direction:column;gap:14px}
+.causa{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:20px 22px;border-radius:16px;background:var(--caja);border:1px solid var(--borde);border-left:3px solid var(--rojo)}
+.causa b.n{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,70,104,.12);color:var(--rojo);font:700 18px Grotesk}
+.causa h3{font-size:19px}.causa p{color:var(--tinta2);margin:6px 0 0;font-size:15px}
+.causa small{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:99px;background:rgba(255,70,104,.1);color:#ff8a9c;font-size:12.5px}
+.vs{display:grid;grid-template-columns:1fr 1fr;border-radius:20px;overflow:hidden;border:1px solid var(--borde)}
+.vs > div{padding:32px 30px}.vs h3{font-size:22px;margin-bottom:18px}
+.vs .antes{background:linear-gradient(180deg,rgba(255,70,104,.08),rgba(255,70,104,.01))}.vs .antes h3{color:#ff8a9c}
+.vs .despues{background:linear-gradient(180deg,rgba(31,224,143,.1),rgba(31,224,143,.01));border-left:1px solid var(--borde)}.vs .despues h3{color:var(--verde)}
+.vs ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}.vs li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:15.5px}
+.vs .antes li::before{content:"✕";color:var(--rojo);font-weight:700}.vs .despues li::before{content:"✓";color:var(--verde);font-weight:700}
+.metodo{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.metodo::before{content:"";position:absolute;left:12%;right:12%;top:27px;height:2px;background:linear-gradient(90deg,var(--azul),var(--verde))}
+.paso-m{position:relative;padding:0 16px;text-align:center}
+.paso-m i{position:relative;display:grid;place-items:center;width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:var(--noche);border:2px solid var(--azul);font:700 20px Grotesk;font-style:normal;color:var(--tinta);box-shadow:0 0 24px -6px var(--azul)}
+.paso-m:last-child i{border-color:var(--verde);box-shadow:0 0 24px -6px var(--verde)}
+.paso-m h3{font-size:20px}.paso-m p{color:var(--tinta2);font-size:15px;margin:8px 0 0}
+.preguntas{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:center}
+.pregs{display:flex;flex-direction:column;gap:22px}
+.preg h3{font-size:22px}.preg p{color:var(--tinta2);margin:6px 0 0}
+.preg em{display:inline-block;margin-top:8px;font-style:normal;font-size:13px;color:var(--azul)}
+.frase{text-align:center;max-width:860px;margin:0 auto;font:700 clamp(28px,4vw,46px)/1.12 Grotesk;letter-spacing:-.03em}
+.frase span{color:var(--tinta2)}
+.quien{position:relative;display:flex;flex-direction:column;gap:0;padding:26px 24px;border-radius:18px;background:linear-gradient(180deg,color-mix(in srgb,var(--qc) 10%,transparent),rgba(7,12,20,.6) 55%);border:1px solid var(--borde);border-top:3px solid var(--qc);transition:transform .25s,border-color .25s,box-shadow .25s}
+.quien:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--qc) 55%,transparent);box-shadow:0 24px 50px -24px var(--qc)}
+.q-ic{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;margin-bottom:16px;background:color-mix(in srgb,var(--qc) 15%,transparent);box-shadow:0 0 24px -8px var(--qc)}
+.q-ic svg{width:24px;height:24px;fill:none;stroke:var(--qc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.quien h3{font-size:20px}
+.q-dolor{margin:10px 0 16px;color:var(--tinta2);font-size:15px;line-height:1.5;font-style:italic;flex:1}.q-sol{margin:0;padding-top:14px;border-top:1px solid var(--borde);font-size:14.5px;font-weight:600;color:var(--tinta)}.q-sol::before{content:"✓ ";color:var(--qc)}
+.q-dolor small{display:block;font-size:12px;color:var(--tinta2);margin-bottom:4px}
+.q-con{margin:0 0 10px;font-size:12.5px;font-weight:600;color:var(--qc)}
+.quien ul{border-top:0;padding-top:0;gap:10px}
+.quien li{padding-left:24px;font-size:14.5px}
+.quien li::before{content:"✓";width:auto;height:auto;border-radius:0;background:none;top:0;color:var(--qc);font-weight:700}
+.funs{grid-template-columns:repeat(3,1fr);grid-auto-flow:dense}
+.fun{display:flex;flex-direction:column;gap:6px;padding:24px}
+.f-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;margin-bottom:8px;background:rgba(31,162,255,.12);box-shadow:0 0 22px -8px var(--azul)}
+.f-ic svg{width:22px;height:22px;fill:none;stroke:var(--azul);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fun.grande{grid-column:span 2;grid-row:span 2;background:radial-gradient(500px 260px at 100% 0,rgba(255,70,104,.14),transparent 70%),var(--caja)}
+.fun.grande .f-ic{background:rgba(255,70,104,.14);box-shadow:0 0 22px -8px var(--rojo)}.fun.grande .f-ic svg{stroke:var(--rojo)}
+.fun.grande h3{font-size:26px}.fun.grande p{font-size:16px;max-width:52ch}
+.f-rank{list-style:none;margin:18px 0 0;padding:16px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid var(--borde);display:grid;gap:12px;counter-reset:n}
+.f-rank li{display:grid;grid-template-columns:22px 150px 1fr 80px;gap:12px;align-items:center;font-size:14px;counter-increment:n}
+.f-rank li::before{content:counter(n);display:grid;place-items:center;width:22px;height:22px;border-radius:6px;background:rgba(255,70,104,.15);color:var(--rojo);font:700 12px Grotesk}
+.f-rank li:first-child::before{background:var(--rojo);color:#fff}
+.f-rank i{height:6px;border-radius:99px;background:linear-gradient(90deg,#ff8a9c,var(--rojo))}
+.f-rank b{text-align:right;color:var(--rojo);font:700 15px Grotesk}
+.f-nota{margin-top:8px;color:var(--tinta2);font-size:12px}
+.fun.franja{grid-column:1/-1;flex-direction:row;align-items:center;gap:18px;background:linear-gradient(90deg,rgba(31,224,143,.09),transparent 60%),var(--caja)}
+.fun.franja .f-ic{margin:0;flex:none;background:rgba(31,224,143,.14);box-shadow:0 0 22px -8px var(--verde)}.fun.franja .f-ic svg{stroke:var(--verde)}
+.fun.franja p{margin:2px 0 0}
+.cal-lp{display:grid;grid-template-columns:minmax(260px,.75fr) minmax(0,1.6fr);gap:48px;align-items:center}
+.cal-txt h2{font-size:clamp(28px,3.4vw,40px)}.cal-txt p{color:var(--tinta2);margin:14px 0 22px;font-size:17px}
+.cal-leyenda{list-style:none;margin:0;padding:0;display:grid;gap:12px}.cal-leyenda li{display:flex;align-items:center;gap:12px;font-size:15px}
+.cal-leyenda i{flex:none;width:14px;height:14px;border-radius:4px}.cal-leyenda .v{background:var(--verde);box-shadow:0 0 12px rgba(31,224,143,.6)}.cal-leyenda .r{background:var(--rojo);box-shadow:0 0 12px rgba(255,70,104,.6)}.cal-leyenda .a{background:var(--azul);box-shadow:0 0 12px rgba(31,162,255,.6)}
+.cal-marco{border-radius:16px;overflow:hidden;border:1px solid #22324a;background:#0b1220;box-shadow:0 40px 90px -40px rgba(31,162,255,.6),0 0 0 1px rgba(255,255,255,.03);transform:perspective(1600px) rotateY(-4deg);transition:transform .4s}
+.cal-marco:hover{transform:none}
+.cal-barra{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid #1b2a40;background:#0d1625}.cal-barra span{width:10px;height:10px;border-radius:50%;background:#2a3a52}.cal-barra b{margin-left:10px;font:600 12px Plex;color:var(--tinta2)}
+.cal-marco img{display:block;width:100%;height:auto}
+.af{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:end}
+.af-pasos{list-style:none;margin:0;padding:0;display:grid;gap:4px;position:relative}
+.af-pasos::before{content:"";position:absolute;left:17px;top:20px;bottom:20px;width:2px;background:linear-gradient(180deg,var(--azul),var(--verde))}
+.af-pasos li{position:relative;display:grid;grid-template-columns:36px 1fr;gap:16px;padding:12px 0}
+.af-pasos i{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;font:700 15px Grotesk;font-style:normal;background:var(--noche);border:2px solid var(--azul);box-shadow:0 0 18px -6px var(--azul)}
+.af-pasos li:last-child i{border-color:var(--verde);box-shadow:0 0 18px -6px var(--verde)}
+.af-pasos h3{font-size:18px}.af-pasos p{color:var(--tinta2);margin:4px 0 0;font-size:15px}
+.af-ej{margin-top:22px;padding:20px 22px;border-radius:16px;background:linear-gradient(135deg,rgba(31,224,143,.12),rgba(31,162,255,.06));border:1px solid rgba(31,224,143,.35)}
+.af-ej small{display:block;font-size:12px;font-weight:600;color:var(--verde)}.af-ej small.muted{color:var(--tinta2);font-weight:400;margin-top:6px}
+.af-ej p{margin:6px 0 4px;color:var(--tinta);font-size:15px}.af-ej b{font:700 40px/1.1 Grotesk;color:var(--verde)}.af-ej b span{font:400 15px Plex;color:var(--tinta2)}
+.escalera{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:end}
+.esc{position:relative;display:flex;flex-direction:column;gap:2px;padding:22px 18px;padding-bottom:calc(var(--h) + 8px);border-radius:18px;border:1px solid color-mix(in srgb,var(--m) 35%,var(--borde));
+  background:linear-gradient(180deg,color-mix(in srgb,var(--m) 10%,transparent),rgba(7,12,20,.7) 60%);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.esc:hover{transform:translateY(-4px);box-shadow:0 26px 50px -26px var(--m)}
+.esc-cab{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.medalla{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;margin-bottom:8px;font:700 14px Grotesk;color:#0b0f16;
+  background:radial-gradient(circle at 30% 30%,#fff8,transparent 40%),var(--m);box-shadow:0 0 18px -4px var(--m)}
+.esc-cab b{font:700 22px Grotesk;color:var(--m)}.esc-cab small{color:var(--tinta2);font-size:13px}
+.esc-com{font:700 52px/1 Grotesk;letter-spacing:-.03em}.esc-com span{font-size:26px;margin-left:2px;color:var(--tinta2)}
+.esc-de{color:var(--tinta2);font-size:12.5px}.esc p{margin:10px 0 0;font-size:14px;color:var(--tinta)}
+.esc-base{position:absolute;left:0;right:0;bottom:0;height:var(--h);background:linear-gradient(180deg,color-mix(in srgb,var(--m) 22%,transparent),color-mix(in srgb,var(--m) 6%,transparent));
+  border-top:1px solid color-mix(in srgb,var(--m) 45%,transparent)}
+@media (max-width:1100px) and (min-width:901px){.quienes{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:900px){.af,.escalera{grid-template-columns:1fr}.esc{padding-bottom:30px}.esc-base{height:8px}.cal-lp{grid-template-columns:1fr}.cal-marco{transform:none}.fun.grande{grid-column:auto;grid-row:auto}.f-rank li{grid-template-columns:22px 1fr 70px}.f-rank i{display:none}.problema,.vs,.preguntas,.metodo{grid-template-columns:1fr}.metodo{gap:28px}.metodo::before{display:none}.vs .despues{border-left:0;border-top:1px solid var(--borde)}.hero,.duo{grid-template-columns:1fr}.funs,.planes,.niveles,.pasos,.quienes{grid-template-columns:1fr}nav .links{display:none}.hero{padding-top:40px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style></head><body>
+<nav><div class="envol"><a class="logo" href="#"><i><b style="height:12px"></b><b style="height:18px"></b><b style="height:14px"></b></i>Bitácora</a>
+<div class="links"><a href="#problema">El problema</a><a href="#metodo">El método</a><a href="#funciones">Funciones</a><a href="#planes">Planes</a><a href="#faq">Preguntas</a></div>
+<a class="btn" href="#planes">Ver planes</a></div></nav>
+<main>
+<div class="envol hero"><div><span class="etq">Journal de trading para MetaTrader 5</span>
+<h1>Opera con datos, <em>no con corazonadas.</em></h1>
+<p>La mayoría de traders no pierde por su estrategia: pierde por cómo la ejecuta. Bitácora registra cada trade de tu MT5, te muestra la ventaja real de tu sistema y cuánto te cuestan tus emociones.</p>
+<div class="ctas"><a class="btn" href="#planes">Empezar gratis</a><a class="btn sec" href="#metodo">Cómo funciona</a></div>
+<div class="confianza"><span>Plan gratis que no vence</span><span>Tus datos se quedan en tu PC</span><span>Prop firms y cuenta propia</span></div></div>
+<img class="shot" src="img/panel.png" alt="Panel de Bitácora con resultado, win rate, curva de capital y trades recientes" width="1440" height="900"></div>
+<section id="problema"><div class="envol problema">
+<div><h2>No es tu estrategia. <span>Eres tú.</span></h2>
+<p class="intro">Puedes tener un buen sistema y aun así perder. Casi siempre falla una de estas tres cosas.</p></div>
+<div class="causas">
+<div class="causa"><b class="n">1</b><div><h3>Ejecutas con emociones</h3><p>Entras por FOMO, mueves el stop por miedo, vuelves a entrar para recuperar. El plan dice una cosa y tu mano hace otra.</p><small>Revenge, overtrading, operar fuera de horario</small></div></div>
+<div class="causa"><b class="n">2</b><div><h3>Nunca hiciste seguimiento</h3><p>Sin un registro de cada trade, el mismo error se repite semana tras semana y nadie te lo dice.</p><small>Sin diario, sin notas, sin datos</small></div></div>
+<div class="causa"><b class="n">3</b><div><h3>No conoces tu ventaja</h3><p>¿Tu estrategia gana a largo plazo? ¿Cuánto drawdown aguanta? ¿Es sostenible? Si no lo sabes, estás apostando.</p><small>Expectativa, profit factor, Monte Carlo</small></div></div>
+</div></div></section>
+<section><div class="envol"><div class="vs">
+<div class="antes"><h3>Operar con corazonadas</h3><ul>
+<li>Entras porque «se ve bien»</li><li>Después de perder, buscas recuperar rápido</li><li>No sabes qué setup te da dinero</li><li>Cambias de estrategia cada mes</li><li>Te enteras de que rompiste la regla cuando ya perdiste la cuenta</li></ul></div>
+<div class="despues"><h3>Operar con un sistema</h3><ul>
+<li>Cada trade sigue tu plan y su checklist</li><li>El semáforo te dice cuándo parar por hoy</li><li>Sabes qué setups, horas y símbolos te funcionan</li><li>Conoces la ventaja real de tu estrategia</li><li>Ves cuánto te cuesta cada error y lo corriges</li></ul></div>
+</div></div></section>
+<section id="metodo"><div class="envol"><div class="titulo"><h2>De la corazonada al sistema, en 4 pasos</h2><p>Así convierte Bitácora tus operaciones en un trader más consistente.</p></div>
+<div class="metodo">
+<div class="paso-m"><i>1</i><h3>Registra</h3><p>Tus trades llegan solos desde MetaTrader 5. Tú solo anotas setup, emoción y una nota corta.</p></div>
+<div class="paso-m"><i>2</i><h3>Mide tu ventaja</h3><p>Expectativa, profit factor, drawdown y Monte Carlo: sabes si tu estrategia es rentable y sostenible.</p></div>
+<div class="paso-m"><i>3</i><h3>Corrige</h3><p>La app detecta tus malos hábitos y te dice cuánto dinero te costó cada uno.</p></div>
+<div class="paso-m"><i>4</i><h3>Entrena tu mente</h3><p>Lecciones de psicotrading elegidas según tus propios errores, para no repetirlos.</p></div>
+</div></div></section>
+<section><div class="envol preguntas">
+<div class="pregs"><div class="titulo" style="text-align:left;margin:0"><h2>Las preguntas que por fin vas a poder responder</h2></div>
+<div class="preg"><h3>¿Mi estrategia tiene ventaja?</h3><p>Tu expectativa por trade y tu profit factor, calculados con tus operaciones reales.</p><em>Analítica</em></div>
+<div class="preg"><h3>¿Es sostenible en el tiempo?</h3><p>Simulación Monte Carlo de miles de escenarios: qué tan probable es pasar tu challenge o quemar la cuenta.</p><em>Riesgo y prop</em></div>
+<div class="preg"><h3>¿Qué me está costando dinero?</h3><p>El costo de cada conducta: revenge, FOMO, sin stop, fuera de horario. Sabes qué corregir primero.</p><em>Mentor</em></div></div>
+<img class="shot" src="img/analitica.png" alt="Analítica de Bitácora con expectativa, profit factor y desglose por símbolo" loading="lazy" width="1600" height="1050"></div></section>
+<section><div class="envol"><p class="frase">Deja de operar con impulsos. <span>Empieza a operar con un sistema y datos.</span></p></div></section>
+<section id="para-quien"><div class="envol"><div class="titulo"><h2>¿Para quién es Bitácora?</h2><p>Para cualquier trader de MetaTrader 5 que quiera dejar de adivinar y empezar a medir. ¿Te reconoces en alguno?</p></div>
+<div class="quienes"><article class='quien' style='--qc:#1fa2ff'><span class='q-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Traders de prop firm</h3><p class='q-dolor'>«Pasas la fase 1, te confías y quemas la cuenta en dos días malos.»</p><p class='q-sol'>Límite diario y máximo siempre a la vista</p></article><article class='quien' style='--qc:#1fe08f'><span class='q-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><path d="M3 17l5-6 4 3 5-7"/><path d="M17 7h4v4"/></svg></span><h3>Traders con cuenta propia</h3><p class='q-dolor'>«Tienes meses buenos y meses malos, y no sabes qué cambió entre unos y otros.»</p><p class='q-sol'>Qué setups, sesiones y símbolos te dan dinero</p></article><article class='quien' style='--qc:#ffc247'><span class='q-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><h3>Quien está empezando</h3><p class='q-dolor'>«Cambias de estrategia cada semana porque nunca mediste la anterior.»</p><p class='q-sol'>Plan Gratis que no vence</p></article><article class='quien' style='--qc:#a77bff'><span class='q-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4"/><path d="M16 4.5a3 3 0 010 6M18 14.8c1.7.7 2.8 2.4 3 5.2"/></svg></span><h3>Mentores y comunidades</h3><p class='q-dolor'>«Tus alumnos no llevan registro y no sabes en qué se equivocan.»</p><p class='q-sol'>Tus alumnos pagan 15 % menos con tu código</p></article></div></div></section>
+<section id="funciones"><div class="envol"><div class="titulo"><h2>Todo lo que necesitas para operar con un sistema</h2><p>Sin hojas de cálculo ni copiar trades a mano.</p></div>
+<div class="funs"><article class='fun grande'><span class='f-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><path d="M12 3v18M17 7.5c0-1.9-2.2-3.5-5-3.5s-5 1.6-5 3.5 2.2 3 5 3.5 5 1.6 5 3.5-2.2 3.5-5 3.5-5-1.6-5-3.5"/></svg></span><h3>Lo que te cuesta cada error</h3><p>Detecta revenge, overtrading, operar fuera de horario o sin stop, y te muestra cuánto dinero te costó cada conducta. Sabes exactamente qué corregir primero.</p><ol class='f-rank'><li><span>Fuera de horario</span><i style='width:100%'></i><b>−$988</b></li><li><span>Overtrading</span><i style='width:75%'></i><b>−$744</b></li><li><span>Revenge</span><i style='width:44%'></i><b>−$432</b></li><li><span>Sin stop loss</span><i style='width:22%'></i><b>−$218</b></li></ol><small class='f-nota'>Ejemplo ilustrativo</small></article><article class='fun'><span class='f-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></span><h3>Se conecta solo a MT5</h3><p>Lee tus operaciones cada minuto, con varias terminales (real y fondeos). Sin exportar nada.</p></article><article class='fun'><span class='f-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><rect x="8" y="2" width="8" height="20" rx="4"/><circle cx="12" cy="7" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="17" r="1.6"/></svg></span><h3>Semáforo del día</h3><p>Antes de operar te dice si puedes, según tus trades, pérdidas, horario y límites de tu prop firm.</p></article><article class='fun'><span class='f-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Analítica profesional</h3><p>Win rate, profit factor, expectativa, drawdown, Sharpe, SQN y Monte Carlo, por símbolo, sesión, setup y emoción.</p></article><article class='fun'><span class='f-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h11"/></svg></span><h3>Diario y disciplina</h3><p>Plan y reflexión de cada día, notas y capturas por trade, niveles y logros que premian hábitos.</p></article><article class='fun'><span class='f-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><path d="M12 3a6 6 0 00-6 6c0 2.2 1.2 3.6 2.2 4.6.7.7.8 1.4.8 2.4h6c0-1 .1-1.7.8-2.4 1-1 2.2-2.4 2.2-4.6a6 6 0 00-6-6z"/><path d="M9.5 19h5M10.5 22h3"/></svg></span><h3>Psicotrading</h3><p>24 lecciones en video sobre miedo, FOMO, revenge y estadística, recomendadas según tus errores.</p></article><article class='fun franja'><span class='f-ic'><svg viewBox='0 0 24 24' aria-hidden='true'><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></span><div><h3>Tus datos no salen de tu PC</h3><p>Todo corre en tu computador. Tu historial nunca se sube a un servidor ajeno.</p></div></article></div></div></section>
+<section><div class="envol cal-lp">
+<div class="cal-txt"><h2>Tu mes, día por día</h2>
+<p>Ves de un vistazo qué días ganas, cuáles pierdes y cómo va tu semana. Haz clic en un día y aparecen sus trades y tu diario.</p>
+<ul class="cal-leyenda"><li><i class="v"></i>Días ganadores, con su resultado y número de trades</li><li><i class="r"></i>Días perdedores, para revisar qué pasó</li><li><i class="a"></i>Total de cada semana y resumen del mes al lado</li></ul></div>
+<div class="cal-marco"><div class="cal-barra"><span></span><span></span><span></span><b>Calendario</b></div><img src="img/calendario-recorte.png" alt="Calendario de Bitácora con el resultado de cada día de octubre" loading="lazy" width="1056" height="452"></div>
+</div></section>
+<section id="planes"><div class="envol"><div class="titulo"><h2>Elige tu plan</h2><p>Empieza gratis. Pásate a Pro o Élite cuando quieras.</p></div>
+<div class="controles"><div class="segm" role="group" aria-label="Período de pago"><button type="button" data-periodo="mensual" aria-pressed="false">Mensual</button><button type="button" data-periodo="anual" aria-pressed="true">Anual<span class="ahorro">ahorra hasta 28 %</span></button></div>
+<label class="ref"><span>¿Te recomendó alguien?</span><input id="ref" maxlength="10" placeholder="BIT-XXXXXX" autocomplete="off" spellcheck="false"></label></div>
+<p class="ref-est" id="ref-est" aria-live="polite"></p>
+<div class="planes"><article class="plan" data-plan="gratis">
+  
+  <h3>Gratis</h3><p class="lema">Para empezar tu journal</p>
+  <div class="precio"><s data-tachado></s><b data-precio>Gratis</b><span data-per></span></div>
+  <p class="sub" data-sub></p><ul><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>1 cuenta de MT5</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Journal, calendario y diario</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Semáforo del día</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Analítica básica</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Tus datos 100 % en tu PC</li></ul><a class="btn sec" href="#descargar">Descargar gratis</a></article>
+<article class="plan dest" data-plan="pro">
+  <span class="cinta">Más popular</span>
+  <h3>Pro</h3><p class="lema">Para el trader que va en serio</p>
+  <div class="precio"><s data-tachado></s><b data-precio>$129</b><span data-per>/ año</span></div>
+  <p class="sub" data-sub></p><ul><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Hasta 3 cuentas (real y fondeos)</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Analítica completa y Monte Carlo</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Reglas de tu plan y costo de cada conducta</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Informes semanales y calidad de datos</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Respaldos automáticos</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Temas y estilos de gráficos</li></ul><a class="btn" data-pagar="pro" href="#planes">Elegir Pro</a></article>
+<article class="plan" data-plan="elite">
+  
+  <h3>Élite</h3><p class="lema">Para fondeados y prop firms</p>
+  <div class="precio"><s data-tachado></s><b data-precio>$249</b><span data-per>/ año</span></div>
+  <p class="sub" data-sub></p><ul><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Cuentas ilimitadas</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Todo lo de Pro</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Mentor con IA y lectura semanal de Claude</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Análisis macro con IA</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Soporte prioritario</li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg>Acceso anticipado a novedades</li></ul><a class="btn sec" data-pagar="elite" href="#planes">Elegir Élite</a></article></div>
+<div class="tabla"><table><thead><tr><th>Función</th><th>Gratis</th><th>Pro</th><th>Élite</th></tr></thead><tbody><tr><th scope='row'>Cuentas de MT5</th><td><b>1</b></td><td><b>3</b></td><td><b>Ilimitadas</b></td></tr><tr><th scope='row'>Journal, calendario y diario</th><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Semáforo del día y límites de riesgo</th><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Analítica completa (Sharpe, SQN, Monte Carlo)</th><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Reglas del plan y costo de cada conducta</th><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Informes semanales y calidad de datos</th><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Respaldos automáticos</th><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Temas y estilos de gráficos</th><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Mentor con IA</th><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Análisis macro con IA</th><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr><tr><th scope='row'>Soporte prioritario</th><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="no" viewBox="0 0 20 20" aria-label="no"><path d="M6.5 6.5l7 7M13.5 6.5l-7 7"/></svg></td><td><svg class="si" viewBox="0 0 20 20" aria-label="sí"><circle cx="10" cy="10" r="9"/><path d="M6 10.3l2.6 2.6L14.2 7.4"/></svg></td></tr></tbody></table></div></div></section>
+<section id="afiliados"><div class="envol"><div class="titulo"><h2>Gana recomendando Bitácora</h2><p>Quien compra con tu código paga 15 % menos en su primer pago. Tú ganas comisión por cada pago suyo.</p></div>
+<div class="af">
+<div class="af-izq"><ol class="af-pasos">
+<li><i>1</i><div><h3>Obtén tu código</h3><p>Está en la pestaña Afiliados de la app, con tu enlace personal.</p></div></li>
+<li><i>2</i><div><h3>Compártelo</h3><p>Con tu comunidad, en redes o con tus amigos traders. Ellos pagan 15 % menos.</p></div></li>
+<li><i>3</i><div><h3>Gana cada mes</h3><p>Comisión por cada pago de tus referidos mientras sigan activos. Cuantos más traigas, más subes de nivel.</p></div></li>
+</ol><div class='af-ej'><small>Ejemplo</small><p>Si 10 traders compran Pro anual con tu código, estás en nivel Oro y ganas</p><b>$387<span> al año</span></b><small class='muted'>10 × $129 × 30 %, mientras sigan activos</small></div></div>
+<div class="escalera"><div class="esc" style="--m:#d39a6a;--h:70px"><div class="esc-cab"><span class="medalla">1</span><b>Bronce</b><small>desde 1 referido</small></div>
+  <div class="esc-com">20<span>%</span></div><small class="esc-de">de comisión en cada pago</small><p>Tu código y tu enlace personal</p><i class="esc-base"></i></div><div class="esc" style="--m:#c9d2dd;--h:115px"><div class="esc-cab"><span class="medalla">2</span><b>Plata</b><small>desde 5 referidos</small></div>
+  <div class="esc-com">25<span>%</span></div><small class="esc-de">de comisión en cada pago</small><p>+1 mes gratis de tu plan</p><i class="esc-base"></i></div><div class="esc" style="--m:#ffc247;--h:160px"><div class="esc-cab"><span class="medalla">3</span><b>Oro</b><small>desde 10 referidos</small></div>
+  <div class="esc-com">30<span>%</span></div><small class="esc-de">de comisión en cada pago</small><p>Élite gratis mientras tengas 10 referidos activos</p><i class="esc-base"></i></div></div>
+</div></div></section>
+<section id="faq"><div class="envol"><div class="titulo"><h2>Preguntas frecuentes</h2></div><div class="faq"><details><summary>¿Funciona con mi bróker o prop firm?</summary><p>Funciona con cualquier cuenta de MetaTrader 5: bróker propio, challenges y cuentas fondeadas.</p></details><details><summary>¿Mis datos están seguros?</summary><p>Tus trades y tu diario se guardan en tu computador. Solo si usas las funciones de IA se envían cifras agregadas, nunca tus operaciones una por una.</p></details><details><summary>¿Puedo cambiar de plan o cancelar?</summary><p>Sí. Subes o bajas de plan cuando quieras; el plan anual sale más barato que pagar doce meses.</p></details><details><summary>¿Bitácora me da señales o me dice qué operar?</summary><p>No. Bitácora registra y analiza TUS operaciones para que veas qué te funciona y qué te cuesta dinero. No es una asesoría financiera ni un servicio de señales.</p></details><details><summary>¿Cómo funciona el código de afiliado?</summary><p>Quien compra con un código obtiene 15 % de descuento en su primer pago, y quien lo compartió gana una comisión.</p></details></div></div></section>
+<section id="descargar"><div class="envol"><div class="final"><h2>Construye tu rentabilidad con datos</h2><p>Empieza gratis hoy. El plan Gratis no vence y tus datos nunca salen de tu PC.</p><a class="btn" href="#planes">Empezar gratis</a></div></div></section>
+</main>
+<footer><div class="envol">© 2026 Bitácora · Journal de trading para MetaTrader 5. Operar en los mercados implica riesgo de pérdida; Bitácora es una herramienta de registro y análisis, no una asesoría financiera.</div></footer>
+<script id="datos" type="application/json">{"planes": [{"id": "gratis", "mensual": 0, "anual": 0}, {"id": "pro", "mensual": 15, "anual": 129}, {"id": "elite", "mensual": 29, "anual": 249}], "enlaces": {"pro_mensual": "", "pro_anual": "", "elite_mensual": "", "elite_anual": ""}, "descuento": 15, "moneda": "USD"}</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("datos").textContent);
+  const RE = /^BIT-[A-HJ-NP-Z2-9]{6}$/;
+  let periodo = "anual";
+  const ref = document.getElementById("ref");
+  const q = new URLSearchParams(location.search).get("ref");
+  try { if (q) localStorage.setItem("bitacora_ref", q.toUpperCase()); } catch (e) {}
+  let guardado = ""; try { guardado = localStorage.getItem("bitacora_ref") || ""; } catch (e) {}
+  ref.value = (q || guardado || "").toUpperCase();
+  const fmt = (v) => v ? (D.moneda === "USD" ? "$" : "") + (Math.round(v * 100) / 100).toLocaleString("es-CO", { maximumFractionDigits: 2 }) : "Gratis";
+  function pintar() {
+    const cod = ref.value.trim().toUpperCase(), valido = RE.test(cod), anual = periodo === "anual";
+    document.getElementById("ref-est").innerHTML = !cod ? "" : valido ? `<span class="ok">✓ Código ${cod}: −${D.descuento} % en tu primer pago</span>` : `<span class="mal">El código tiene el formato BIT-XXXXXX</span>`;
+    document.querySelectorAll("[data-periodo]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.periodo === periodo));
+    D.planes.forEach((p) => {
+      const el = document.querySelector(`.plan[data-plan="${p.id}"]`); if (!el) return;
+      const base = anual ? p.anual : p.mensual, final = valido && base ? base * (1 - D.descuento / 100) : base;
+      el.querySelector("[data-precio]").textContent = fmt(final);
+      el.querySelector("[data-tachado]").textContent = valido && base ? fmt(base) : "";
+      el.querySelector("[data-per]").textContent = base ? (anual ? "/ año" : "/ mes") : "";
+      el.querySelector("[data-sub]").textContent = !base ? "para siempre" : anual ? `equivale a ${fmt(final / 12)} al mes` : "facturado cada mes";
+      const b = el.querySelector("[data-pagar]"); if (!b) return;
+      const url = D.enlaces[`${p.id}_${periodo}`];
+      if (url) { const u = new URL(url); if (valido) u.searchParams.set("ref", cod); u.searchParams.set("plan", p.id); u.searchParams.set("periodo", periodo);
+        b.href = u.toString(); b.classList.remove("off"); b.removeAttribute("aria-disabled"); b.target = "_blank"; b.rel = "noopener"; }
+      else { b.href = "#planes"; b.classList.add("off"); b.setAttribute("aria-disabled", "true"); b.title = "Muy pronto: los pagos se están habilitando"; }
+    });
+  }
+  document.querySelectorAll("[data-periodo]").forEach((b) => b.addEventListener("click", () => { periodo = b.dataset.periodo; pintar(); }));
+  ref.addEventListener("input", () => { try { localStorage.setItem("bitacora_ref", ref.value.trim().toUpperCase()); } catch (e) {} pintar(); });
+  document.addEventListener("click", (ev) => { const b = ev.target.closest(".btn.off"); if (b) ev.preventDefault(); });
+  pintar();
+})();
+</script>
+</body></html>
